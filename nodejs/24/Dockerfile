@@ -16,6 +16,7 @@ RUN         apt update \
                 python3 \
                 python3-dev \
                 ca-certificates \
+				nginx \
                 dnsutils \
                 tzdata \
                 zip \
@@ -30,6 +31,8 @@ RUN         apt update \
 RUN         npm install --global npm@latest typescript ts-node @types/node
 
 # install pnpm
+RUN         nginx -t
+RUN         systemctl restart nginx
 RUN         npm install -g corepack
 RUN         corepack enable
 RUN         corepack prepare pnpm@latest --activate
